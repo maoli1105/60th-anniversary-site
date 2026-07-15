@@ -232,6 +232,9 @@ a {
   position: relative;
   z-index: 1;
   padding: 0 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-badge {
@@ -249,19 +252,24 @@ a {
   font-family: var(--font-heading);
   font-size: clamp(4rem, 12vw, 10rem);
   font-weight: 700;
-  color: var(--color-gold);
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hero-number .num {
   background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 50%, #8B6914 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.hero-number span {
+.hero-number .th {
   font-size: 0.35em;
-  vertical-align: super;
-  -webkit-text-fill-color: var(--color-gold-light);
+  color: var(--color-gold-light);
+  margin-top: 0.15em;
 }
 
 .hero-title {
@@ -379,7 +387,7 @@ a {
 }
 
 .section-divider {
-  width: 40px;
+  width: 0;
   height: 1px;
   background: var(--color-gold);
   margin: 0 auto;
@@ -921,7 +929,447 @@ a {
 
 
 /* ============================================
-   Animations
+   Scroll Progress Bar
+   ============================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  z-index: 1001;
+  transition: width 0.05s linear;
+}
+
+
+/* ============================================
+   Loading Screen
+   ============================================ */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #0F1A2E 0%, var(--color-navy) 40%, #1B3A5E 100%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-content {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.loading-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.loading-ring-track {
+  fill: none;
+  stroke: rgba(184, 134, 11, 0.08);
+  stroke-width: 1;
+}
+
+.loading-ring-fill {
+  fill: none;
+  stroke: url(#gold-gradient);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 565.5;
+  stroke-dashoffset: 565.5;
+  animation: ringDraw 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.4));
+}
+
+@keyframes ringDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.loading-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-number {
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(180deg, #E8D5A3 0%, var(--color-gold) 40%, #8B6914 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loading-th {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-gold-light);
+  letter-spacing: 0.2em;
+  margin-top: -4px;
+  opacity: 0;
+  animation: loadFadeIn 0.5s ease forwards;
+  animation-delay: 0.8s;
+}
+
+.loading-text {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: rgba(212, 168, 67, 0.6);
+  letter-spacing: 0.4em;
+  margin-top: 12px;
+  opacity: 0;
+  animation: loadFadeIn 0.6s ease forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes loadFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================
+   Members Chart / 部員数推移
+   ============================================ */
+
+.members-chart {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.chart-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--color-white);
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.chart-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.chart-tab {
+  padding: 8px 28px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+}
+
+.chart-tab:first-child { border-radius: 2px 0 0 2px; }
+.chart-tab:last-child { border-radius: 0 2px 2px 0; }
+
+.chart-tab.is-active {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+.chart-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  height: 220px;
+  padding-bottom: 32px;
+  position: relative;
+}
+
+.chart-bars::before {
+  content: "";
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 40px;
+  height: 0;
+  background: linear-gradient(180deg, var(--color-gold-light), var(--color-gold));
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  transition: height 1s ease;
+}
+
+.chart-bar.is-grown {
+  height: var(--bar-height);
+}
+
+.chart-bar--current {
+  background: linear-gradient(180deg, #D4A843, #E8C86A);
+  box-shadow: 0 0 12px rgba(184, 134, 11, 0.3);
+}
+
+.chart-value {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: var(--color-gold-light);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease 1s;
+}
+
+.chart-bar.is-grown .chart-value {
+  opacity: 1;
+}
+
+.chart-label {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}
+
+.chart-note {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 16px;
+}
+
+
+/* ============================================
+   Hero Entry Animations
+   ============================================ */
+
+.hero-badge {
+  opacity: 0;
+  animation: heroBadgeIn 0.8s ease forwards;
+  animation-delay: 0.3s;
+  margin-bottom: 16px;
+}
+
+@keyframes heroBadgeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge .badge-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterIn 0.4s ease forwards;
+}
+
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-number {
+  opacity: 0;
+  animation: heroNumberIn 1s ease forwards;
+  animation-delay: 0.6s;
+}
+
+@keyframes heroNumberIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.hero-title {
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 1.8s;
+}
+
+.hero-subtitle {
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 2.1s;
+}
+
+.hero-orgs {
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 2.4s;
+}
+
+.hero-date {
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 2.7s;
+}
+
+.hero-scroll {
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease forwards;
+  animation-delay: 3.2s;
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-decoration .corner {
+  opacity: 0;
+}
+
+.hero-decoration .corner.is-animated {
+  animation: cornerIn 0.8s ease forwards;
+}
+
+.hero-decoration .corner--tl.is-animated { animation-delay: 0.1s; }
+.hero-decoration .corner--tr.is-animated { animation-delay: 0.2s; }
+.hero-decoration .corner--br.is-animated { animation-delay: 0.3s; }
+.hero-decoration .corner--bl.is-animated { animation-delay: 0.4s; }
+
+@keyframes cornerIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-decoration .corner::before {
+  transform: scaleY(0);
+}
+.hero-decoration .corner.is-animated::before {
+  animation: cornerLineV 0.6s ease forwards;
+  animation-delay: inherit;
+}
+
+.hero-decoration .corner::after {
+  transform: scaleX(0);
+}
+.hero-decoration .corner.is-animated::after {
+  animation: cornerLineH 0.6s ease forwards;
+  animation-delay: inherit;
+}
+
+.hero-decoration .corner--tl::before,
+.hero-decoration .corner--tr::before { transform-origin: top; }
+.hero-decoration .corner--bl::before,
+.hero-decoration .corner--br::before { transform-origin: bottom; }
+
+.hero-decoration .corner--tl::after,
+.hero-decoration .corner--bl::after { transform-origin: left; }
+.hero-decoration .corner--tr::after,
+.hero-decoration .corner--br::after { transform-origin: right; }
+
+@keyframes cornerLineV {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes cornerLineH {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.hero-decoration .line-h {
+  transform: scaleX(0);
+  animation: lineHIn 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes lineHIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+
+/* ============================================
+   Timeline Grow Animation
+   ============================================ */
+
+.timeline::before {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1.5s ease;
+}
+
+.timeline.is-growing::before {
+  transform: scaleY(1);
+}
+
+.timeline-year::after {
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.4s ease;
+}
+
+.timeline-item.is-visible .timeline-year::after {
+  transform: translateY(-50%) scale(1);
+  box-shadow: 0 0 8px rgba(184, 134, 11, 0.5);
+}
+
+
+/* ============================================
+   Activity Card Hover Zoom
+   ============================================ */
+
+.activity-thumb img,
+.activity-thumb {
+  transition: transform 0.5s ease;
+}
+
+.activity-card:hover .activity-thumb {
+  transform: scale(1.05);
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+}
+
+
+/* ============================================
+   Section Parallax
+   ============================================ */
+
+.section--program,
+.section--greeting {
+  position: relative;
+}
+
+
+/* ============================================
+   General Animations
    ============================================ */
 
 .fade-in {
@@ -959,6 +1407,14 @@ a {
 
 .stagger > * {
   transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.section-divider {
+  transition: width 0.8s ease;
+}
+
+.section-divider.is-visible {
+  width: 60px;
 }
 
 
@@ -1082,6 +1538,28 @@ a {
 
   .unit-gallery {
     grid-template-columns: 1fr;
+  }
+
+  .chart-bars {
+    gap: 8px;
+    height: 180px;
+  }
+
+  .chart-bar {
+    max-width: 28px;
+  }
+
+  .chart-value {
+    font-size: 0.55rem;
+    top: -18px;
+  }
+
+  .chart-label {
+    font-size: 0.55rem;
+  }
+
+  .members-chart {
+    margin-top: 48px;
   }
 }
 

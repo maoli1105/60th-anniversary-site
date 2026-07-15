@@ -5,12 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>創立60周年記念式典 | 広島県商工会青年部連合会・広島県商工会女性部連合会</title>
   <meta name="description" content="広島県商工会青年部連合会・広島県商工会女性部連合会 創立60周年記念式典 特設サイト">
+  <!-- OGP -->
+  <meta property="og:title" content="創立60周年記念式典 | 広島県商工会 青年部・女性部連合会">
+  <meta property="og:description" content="広島県商工会青年部連合会・広島県商工会女性部連合会は、創立60周年を迎えます。令和9年2月6日（土）記念式典を開催。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/ogp.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="創立60周年記念式典 | 広島県商工会 青年部・女性部連合会">
+  <meta name="twitter:description" content="令和9年2月6日（土）創立60周年記念式典を開催します。">
+  <meta name="twitter:image" content="images/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- ========== Loading Screen ========== -->
+  <div class="loading-screen" id="loading">
+    <div class="loading-content">
+      <svg class="loading-ring" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E8D5A3" />
+            <stop offset="50%" stop-color="#B8860B" />
+            <stop offset="100%" stop-color="#D4A843" />
+          </linearGradient>
+        </defs>
+        <circle class="loading-ring-track" cx="100" cy="100" r="90" />
+        <circle class="loading-ring-fill" cx="100" cy="100" r="90" />
+      </svg>
+      <div class="loading-center">
+        <div class="loading-number"><span class="loading-num">0</span></div>
+        <div class="loading-th">th</div>
+        <div class="loading-text">ANNIVERSARY</div>
+      </div>
+    </div>
+  </div>
 
   <!-- ========== Header ========== -->
   <header class="site-header">
@@ -34,20 +66,19 @@
   </header>
 
 
+  <!-- ========== Scroll Progress ========== -->
+  <div class="scroll-progress"></div>
+
   <!-- ========== Hero ========== -->
   <section class="hero">
     <div class="hero-bg-pattern"></div>
     <div class="hero-decoration">
-      <div class="corner corner--tl"></div>
-      <div class="corner corner--tr"></div>
-      <div class="corner corner--bl"></div>
-      <div class="corner corner--br"></div>
       <div class="line-h line-h--top"></div>
       <div class="line-h line-h--bottom"></div>
     </div>
     <div class="hero-content">
-      <div class="hero-badge">ANNIVERSARY</div>
-      <div class="hero-number">60<span>th</span></div>
+      <div class="hero-badge"><span class="badge-letter">A</span><span class="badge-letter">N</span><span class="badge-letter">N</span><span class="badge-letter">I</span><span class="badge-letter">V</span><span class="badge-letter">E</span><span class="badge-letter">R</span><span class="badge-letter">S</span><span class="badge-letter">A</span><span class="badge-letter">R</span><span class="badge-letter">Y</span></div>
+      <div class="hero-number"><span class="num">0</span><span class="th">th</span></div>
       <h1 class="hero-title">創立60周年記念式典</h1>
       <p class="hero-subtitle">広島県商工会青年部連合会<br>広島県商工会女性部連合会</p>
       <div class="hero-orgs">
@@ -279,6 +310,81 @@
         <div>
           <div class="stat-number" data-count="2027" data-suffix="">0</div>
           <p class="stat-label">記念式典</p>
+        </div>
+      </div>
+
+      <!-- 部員数推移グラフ -->
+      <div class="members-chart fade-in">
+        <h3 class="chart-title">部員数の推移</h3>
+        <div class="chart-tabs">
+          <button class="chart-tab is-active" data-chart="youth">青年部</button>
+          <button class="chart-tab" data-chart="women">女性部</button>
+        </div>
+        <div class="chart-container" id="chart-youth">
+          <div class="chart-bars">
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="85" style="--bar-height:85%"><span class="chart-value">850</span></div>
+              <span class="chart-label">1967</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="92" style="--bar-height:92%"><span class="chart-value">1,240</span></div>
+              <span class="chart-label">1977</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="100" style="--bar-height:100%"><span class="chart-value">1,580</span></div>
+              <span class="chart-label">1987</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="88" style="--bar-height:88%"><span class="chart-value">1,350</span></div>
+              <span class="chart-label">1997</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="72" style="--bar-height:72%"><span class="chart-value">1,080</span></div>
+              <span class="chart-label">2007</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="58" style="--bar-height:58%"><span class="chart-value">920</span></div>
+              <span class="chart-label">2017</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar chart-bar--current" data-value="50" style="--bar-height:50%"><span class="chart-value">780</span></div>
+              <span class="chart-label">2027</span>
+            </div>
+          </div>
+          <p class="chart-note">※ サンプルデータです。正式な数値は商工会より支給予定。</p>
+        </div>
+        <div class="chart-container" id="chart-women" hidden>
+          <div class="chart-bars">
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="70" style="--bar-height:70%"><span class="chart-value">620</span></div>
+              <span class="chart-label">1967</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="82" style="--bar-height:82%"><span class="chart-value">980</span></div>
+              <span class="chart-label">1977</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="95" style="--bar-height:95%"><span class="chart-value">1,320</span></div>
+              <span class="chart-label">1987</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="100" style="--bar-height:100%"><span class="chart-value">1,450</span></div>
+              <span class="chart-label">1997</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="85" style="--bar-height:85%"><span class="chart-value">1,180</span></div>
+              <span class="chart-label">2007</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" data-value="68" style="--bar-height:68%"><span class="chart-value">950</span></div>
+              <span class="chart-label">2017</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar chart-bar--current" data-value="55" style="--bar-height:55%"><span class="chart-value">820</span></div>
+              <span class="chart-label">2027</span>
+            </div>
+          </div>
+          <p class="chart-note">※ サンプルデータです。正式な数値は商工会より支給予定。</p>
         </div>
       </div>
     </div>
