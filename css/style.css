@@ -225,7 +225,7 @@ a {
   background: linear-gradient(90deg, transparent, rgba(184, 134, 11, 0.12), transparent);
 }
 
-.hero-decoration .line-h--top { top: 8%; }
+.hero-decoration .line-h--top { top: 14%; }
 .hero-decoration .line-h--bottom { bottom: 8%; }
 
 .hero-content {
@@ -1636,6 +1636,6 @@ a {
     font-size: 1rem;
   }
 
-  .hero-decoration .line-h--top { top: 4%; }
+  .hero-decoration .line-h--top { top: 12%; }
   .hero-decoration .line-h--bottom { bottom: 4%; }
 }
