@@ -139,36 +139,46 @@
     // ==========================================
     const gallery = document.getElementById('unit-gallery');
 
+    function createPhotoCard(act, index) {
+      const div = document.createElement('div');
+      div.className = 'unit-photo';
+      div.style.opacity = '0';
+      div.style.transform = 'translateY(20px)';
+      div.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+      div.innerHTML =
+        '<div class="photo-placeholder">写真 ' + (index+1) + '</div>' +
+        '<div class="photo-caption">' +
+          '<span class="caption-title">' + act.title + '</span>' +
+          '<span class="caption-text">' + act.description + '</span>' +
+        '</div>';
+
+      // 写真がある場合は img を追加し、読み込めたらプレースホルダーを隠す
+      if (act.photo && !act.photo.includes('placeholder')) {
+        const img = new Image();
+        img.alt = act.caption || act.title;
+        img.onload = function() {
+          const placeholder = div.querySelector('.photo-placeholder');
+          if (placeholder) placeholder.style.display = 'none';
+          div.insertBefore(img, div.firstChild);
+        };
+        img.src = act.photo;
+      }
+
+      gallery.appendChild(div);
+
+      // スタガー登場アニメーション
+      setTimeout(() => {
+        div.style.opacity = '1';
+        div.style.transform = 'translateY(0)';
+      }, 100 + index * 120);
+    }
+
     if (unit.activities && unit.activities.length > 0) {
-      unit.activities.forEach((act, i) => {
-        const div = document.createElement('div');
-        div.className = 'unit-photo fade-in';
-
-        // 写真がある場合は img、なければプレースホルダー
-        const hasPhoto = act.photo && !act.photo.includes('placeholder');
-        const photoHtml = hasPhoto
-          ? '<img src="' + act.photo + '" alt="' + (act.caption || act.title) + '" onerror="this.parentElement.innerHTML=\'<div class=photo-placeholder>写真 ' + (i+1) + '</div>\'">'
-          : '<div class="photo-placeholder">写真 ' + (i+1) + '</div>';
-
-        div.innerHTML = photoHtml +
-          '<div class="photo-caption">' +
-            '<span class="caption-title">' + act.title + '</span>' +
-            '<span class="caption-text">' + act.description + '</span>' +
-          '</div>';
-
-        gallery.appendChild(div);
-      });
+      unit.activities.forEach((act, i) => createPhotoCard(act, i));
     } else {
-      // 活動データ未登録
       for (let i = 0; i < 5; i++) {
-        const div = document.createElement('div');
-        div.className = 'unit-photo fade-in';
-        div.innerHTML = '<div class="photo-placeholder">写真 ' + (i+1) + '</div>' +
-          '<div class="photo-caption">' +
-            '<span class="caption-title">活動 ' + (i+1) + '</span>' +
-            '<span class="caption-text">情報収集中です。</span>' +
-          '</div>';
-        gallery.appendChild(div);
+        createPhotoCard({ title: '活動 ' + (i+1), description: '情報収集中です。', photo: '' }, i);
       }
     }
 
