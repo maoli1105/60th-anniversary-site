@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要 - 株式会社パズル</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @page {
+      size: A4;
+      margin: 20mm 20mm 20mm 20mm;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Yu Gothic', sans-serif;
+      color: #333;
+      background: #fff;
+      line-height: 1.8;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .header-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .header-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1B2A4A;
+      letter-spacing: 0.15em;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .info-row {
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    .info-row:first-child {
+      border-top: 1px solid #E8E8E8;
+    }
+
+    .info-label,
+    .info-value {
+      padding: 24px 0;
+      vertical-align: top;
+      font-size: 0.95rem;
+    }
+
+    .info-label {
+      width: 140px;
+      font-weight: 700;
+      color: #1B2A4A;
+      letter-spacing: 0.1em;
+    }
+
+    .info-value {
+      padding-left: 40px;
+      color: #333;
+    }
+
+    .info-value .line {
+      display: block;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { padding: 0; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <p class="header-label">COMPANY</p>
+      <h1 class="header-title">会社概要</h1>
+    </div>
+
+    <table class="info-table">
+      <tr class="info-row">
+        <td class="info-label">会社名</td>
+        <td class="info-value">株式会社パズル</td>
+      </tr>
+      <tr class="info-row">
+        <td class="info-label">設立</td>
+        <td class="info-value">2017年 2月</td>
+      </tr>
+      <tr class="info-row">
+        <td class="info-label">代表者</td>
+        <td class="info-value">毛利　哲也</td>
+      </tr>
+      <tr class="info-row">
+        <td class="info-label">所在地</td>
+        <td class="info-value">広島県尾道市瀬戸田町名荷1251-7</td>
+      </tr>
+      <tr class="info-row">
+        <td class="info-label">事業内容</td>
+        <td class="info-value">
+          <span class="line">スマートフォンアクセサリーの企画・製造・販売</span>
+          <span class="line">ウェブサイトの企画・デザイン・制作</span>
+          <span class="line">ソフトウェアの設計・開発</span>
+          <span class="line">デジタルライフを豊かにする製品・サービスの開発</span>
+        </td>
+      </tr>
+      <tr class="info-row">
+        <td class="info-label">連絡先</td>
+        <td class="info-value">
+          <span class="line">電話：080-3494-7979</span>
+          <span class="line">メール：maoli1105@gmail.com</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

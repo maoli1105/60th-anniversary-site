@@ -1,0 +1,218 @@
+[
+  {
+    "id": "akiota-youth",
+    "name": "安芸太田町商工会 青年部",
+    "type": "youth",
+    "area": "広島県山県郡安芸太田町",
+    "members": 12,
+    "description": "安芸太田町商工会青年部は、中国山地の豊かな自然に囲まれた安芸太田町を拠点に活動しています。三段峡や温井ダムなどの観光資源を活かした地域振興イベントの企画・運営を中心に、地元の商工業者として地域の活性化に貢献しています。",
+    "activities": [
+      {
+        "title": "かんストリート",
+        "description": "令和5年から継続開催中。地域の商工業を紹介し、来場者1万5千人を記録。",
+        "photo": "images/units/akiota-youth-1.jpg",
+        "caption": "かんストリート会場の様子"
+      },
+      {
+        "title": "青年部研修会",
+        "description": "経営力向上をテーマに異業種交流を実施。県内外から講師を招聘。",
+        "photo": "images/units/akiota-youth-2.jpg",
+        "caption": "研修会での講演風景"
+      },
+      {
+        "title": "三段峡クリーン作戦",
+        "description": "地域の観光資源を守るため、毎年春に清掃活動を実施しています。",
+        "photo": "images/units/akiota-youth-3.jpg",
+        "caption": "三段峡での清掃活動"
+      },
+      {
+        "title": "地域おこし協力隊連携",
+        "description": "移住促進イベントを共同企画。新たな担い手の確保に貢献。",
+        "photo": "images/units/akiota-youth-4.jpg",
+        "caption": "移住促進イベント"
+      },
+      {
+        "title": "安芸太田まるごと食フェス",
+        "description": "地元の食材を活かしたフードイベント。令和6年は3,000人が来場。",
+        "photo": "images/units/akiota-youth-5.jpg",
+        "caption": "食フェスの賑わい"
+      }
+    ],
+    "links": {
+      "hp": "",
+      "sns": ""
+    }
+  },
+  {
+    "id": "akiota-women",
+    "name": "安芸太田町商工会 女性部",
+    "type": "women",
+    "area": "広島県山県郡安芸太田町",
+    "members": 18,
+    "description": "安芸太田町商工会女性部は、地域に根ざした商工業の発展と女性の活躍推進を目指して活動しています。地元特産品を活用した商品開発や、高齢者見守り活動など、地域コミュニティの核として幅広い事業を展開しています。",
+    "activities": [
+      {
+        "title": "特産品開発プロジェクト",
+        "description": "地元食材を活かした加工品の開発・販売。道の駅での販路拡大に成功。",
+        "photo": "images/units/akiota-women-1.jpg",
+        "caption": "特産品の試食販売会"
+      },
+      {
+        "title": "高齢者見守り活動",
+        "description": "独居高齢者宅への定期訪問と安否確認。地域包括ケアへの貢献。",
+        "photo": "images/units/akiota-women-2.jpg",
+        "caption": "見守り訪問の様子"
+      },
+      {
+        "title": "子ども食堂運営",
+        "description": "月2回開催。地域の子どもたちに温かい食事と居場所を提供。",
+        "photo": "images/units/akiota-women-3.jpg",
+        "caption": "子ども食堂の調理風景"
+      },
+      {
+        "title": "経営セミナー",
+        "description": "女性経営者・後継者向けの勉強会を年4回開催。実践的な内容が好評。",
+        "photo": "images/units/akiota-women-4.jpg",
+        "caption": "セミナーでのグループワーク"
+      },
+      {
+        "title": "花いっぱい運動",
+        "description": "商店街や公共施設の花壇整備。四季折々の花で地域を彩る。",
+        "photo": "images/units/akiota-women-5.jpg",
+        "caption": "花壇整備の活動"
+      }
+    ],
+    "links": {
+      "hp": "",
+      "sns": ""
+    }
+  },
+  {
+    "id": "kitahiroshima-youth",
+    "name": "北広島町商工会 青年部",
+    "type": "youth",
+    "area": "広島県山県郡北広島町",
+    "members": 15,
+    "description": "北広島町商工会青年部は、スキー場や神楽など豊富な観光資源を持つ北広島町で活動しています。伝統文化の継承と新たな観光コンテンツの創出に取り組み、若手経営者のネットワークを活かした地域活性化を推進しています。",
+    "activities": [
+      {
+        "title": "神楽フェスティバル",
+        "description": "伝統芸能・神楽の魅力を発信するイベント。県内外から多くの来場者。",
+        "photo": "images/units/kitahiroshima-youth-1.jpg",
+        "caption": "神楽フェスティバルの舞台"
+      },
+      {
+        "title": "雪まつり運営",
+        "description": "冬季観光の目玉イベント。雪像コンテストやスノーアクティビティを企画。",
+        "photo": "images/units/kitahiroshima-youth-2.jpg",
+        "caption": "雪まつり会場"
+      },
+      {
+        "title": "商店街活性化事業",
+        "description": "空き店舗活用やポイントカード事業で商店街の賑わいを創出。",
+        "photo": "images/units/kitahiroshima-youth-3.jpg",
+        "caption": "商店街イベントの様子"
+      },
+      {
+        "title": "防災訓練",
+        "description": "地域住民と連携した防災訓練を毎年実施。災害時の即応体制を構築。",
+        "photo": "images/units/kitahiroshima-youth-4.jpg",
+        "caption": "防災訓練の実施風景"
+      },
+      {
+        "title": "異業種交流会",
+        "description": "年2回開催。業種を超えた情報交換とビジネスマッチングの場。",
+        "photo": "images/units/kitahiroshima-youth-5.jpg",
+        "caption": "交流会での意見交換"
+      }
+    ],
+    "links": {
+      "hp": "",
+      "sns": ""
+    }
+  },
+  {
+    "id": "kitahiroshima-women",
+    "name": "北広島町商工会 女性部",
+    "type": "women",
+    "area": "広島県山県郡北広島町",
+    "members": 22,
+    "description": "北広島町商工会女性部は、地域の食文化や伝統工芸の継承に力を入れています。女性ならではの視点で地域課題の解決に取り組み、次世代の育成にも積極的に関わっています。",
+    "activities": [
+      {
+        "title": "郷土料理伝承教室",
+        "description": "地域の伝統料理を次世代に伝える料理教室。年6回開催。",
+        "photo": "images/units/kitahiroshima-women-1.jpg",
+        "caption": "料理教室の様子"
+      },
+      {
+        "title": "手芸・工芸展示会",
+        "description": "部員の手仕事作品を展示・販売。地域の文化発信に貢献。",
+        "photo": "images/units/kitahiroshima-women-2.jpg",
+        "caption": "展示会場の作品"
+      },
+      {
+        "title": "健康ウォーキング",
+        "description": "季節ごとの自然を楽しみながら健康増進。地域住民にも開放。",
+        "photo": "images/units/kitahiroshima-women-3.jpg",
+        "caption": "ウォーキングイベント"
+      },
+      {
+        "title": "買い物支援事業",
+        "description": "高齢者や交通弱者への買い物支援。移動販売と連携。",
+        "photo": "images/units/kitahiroshima-women-4.jpg",
+        "caption": "買い物支援の活動"
+      },
+      {
+        "title": "女性部研修旅行",
+        "description": "他地域の先進事例を学ぶ研修旅行。毎年1回実施。",
+        "photo": "images/units/kitahiroshima-women-5.jpg",
+        "caption": "研修旅行での視察"
+      }
+    ],
+    "links": {
+      "hp": "",
+      "sns": ""
+    }
+  },
+  {
+    "id": "sera-youth",
+    "name": "世羅町商工会 青年部",
+    "type": "youth",
+    "area": "広島県世羅郡世羅町",
+    "members": 10,
+    "description": "世羅町商工会青年部は、世羅高原の花畑やワイナリーなど観光資源が豊富な世羅町で活動しています。農商工連携による6次産業化や、駅伝の町としてのスポーツ振興に取り組んでいます。",
+    "activities": [],
+    "links": { "hp": "", "sns": "" }
+  },
+  {
+    "id": "sera-women",
+    "name": "世羅町商工会 女性部",
+    "type": "women",
+    "area": "広島県世羅郡世羅町",
+    "members": 16,
+    "description": "世羅町商工会女性部は、花と果物の町・世羅で地域の魅力発信に取り組んでいます。特産品の販路開拓や、地域の絆づくりに貢献しています。",
+    "activities": [],
+    "links": { "hp": "", "sns": "" }
+  },
+  {
+    "id": "fuchu-youth",
+    "name": "府中町商工会 青年部",
+    "type": "youth",
+    "area": "広島県安芸郡府中町",
+    "members": 14,
+    "description": "府中町商工会青年部は、広島市に隣接する府中町で都市型の商工業振興に取り組んでいます。大型商業施設との共存を図りながら、地元商店の魅力を発信する活動を展開しています。",
+    "activities": [],
+    "links": { "hp": "", "sns": "" }
+  },
+  {
+    "id": "fuchu-women",
+    "name": "府中町商工会 女性部",
+    "type": "women",
+    "area": "広島県安芸郡府中町",
+    "members": 20,
+    "description": "府中町商工会女性部は、都市近郊の利便性を活かしながら、地域密着型の活動を展開しています。子育て支援や福祉活動を通じて、住みよいまちづくりに貢献しています。",
+    "activities": [],
+    "links": { "hp": "", "sns": "" }
+  }
+]

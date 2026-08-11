@@ -852,15 +852,77 @@ a {
   margin-bottom: 48px;
 }
 
+.unit-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--color-navy);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-gold);
+  display: inline-block;
+}
+
 .unit-photo {
+  position: relative;
   aspect-ratio: 4 / 3;
-  background: var(--color-gold-pale);
   border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-gold-pale);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
   color: var(--color-text-light);
+}
+
+.unit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.unit-photo:hover img {
+  transform: scale(1.05);
+}
+
+/* キャプションオーバーレイ */
+.photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(27, 42, 74, 0.85));
+  padding: 32px 16px 14px;
+  transform: translateY(100%);
+  transition: transform 0.35s ease;
+}
+
+.unit-photo:hover .photo-caption,
+.unit-photo.caption-active .photo-caption {
+  transform: translateY(0);
+}
+
+.caption-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-gold-light);
+  margin-bottom: 4px;
+}
+
+.caption-text {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
 }
 
 .unit-nav {
@@ -878,6 +940,51 @@ a {
 
 .unit-nav a:hover {
   opacity: 0.7;
+}
+
+/* Unit Links */
+.unit-links {
+  margin-top: 48px;
+  margin-bottom: 32px;
+}
+
+.unit-links-list {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.unit-link-item {
+  display: inline-block;
+  padding: 10px 24px;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: 0.85rem;
+  border-radius: 2px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.unit-link-item:hover {
+  background: var(--color-gold);
+  color: var(--color-white);
+}
+
+/* Unit Tag color variants */
+.unit-tag--youth {
+  border-color: var(--color-youth);
+  color: var(--color-youth);
+}
+
+.unit-tag--women {
+  border-color: var(--color-women);
+  color: var(--color-women);
+}
+
+/* Activity card as link */
+a.activity-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 

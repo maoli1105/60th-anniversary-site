@@ -299,6 +299,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
+  // Photo Caption (tap toggle for mobile)
+  // ==========================================
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (isTouchDevice) {
+    document.querySelectorAll('.unit-photo').forEach(photo => {
+      photo.addEventListener('click', (e) => {
+        // 他の開いているキャプションを閉じる
+        document.querySelectorAll('.unit-photo.caption-active').forEach(p => {
+          if (p !== photo) p.classList.remove('caption-active');
+        });
+        photo.classList.toggle('caption-active');
+      });
+    });
+
+    // エリア外タップで閉じる
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.unit-photo')) {
+        document.querySelectorAll('.unit-photo.caption-active').forEach(p => {
+          p.classList.remove('caption-active');
+        });
+      }
+    });
+  }
+
+  // ==========================================
   // Header Background on Scroll
   // ==========================================
   const header = document.querySelector('.site-header');
