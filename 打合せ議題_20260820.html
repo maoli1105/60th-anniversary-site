@@ -1,0 +1,720 @@
+<title>打合せ議題 - 60周年記念式典HP制作</title>
+<style>
+  @font-face {
+    font-family: 'Display';
+    src: local('Hiragino Mincho ProN'), local('Yu Mincho'), local('serif');
+  }
+
+  :root {
+    --navy: #1B2A4A;
+    --navy-mid: #2C3E6B;
+    --gold: #B8860B;
+    --gold-light: #D4A843;
+    --cream: #FAF8F5;
+    --warm-grey: #E8E2D8;
+    --text: #2A2A2A;
+    --text-sub: #5A5A5A;
+    --bg: #FFFFFF;
+    --card-bg: #FAFAF8;
+    --border: #DDD6CA;
+    --tag-server: #1B5E8A;
+    --tag-tech: #6B5B3A;
+    --tag-ops: #8A1B4A;
+    --green: #2D7A4F;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --navy: #A3B4D0;
+      --navy-mid: #7B93C0;
+      --gold: #D4A843;
+      --gold-light: #E8D5A3;
+      --cream: #1A1A1E;
+      --warm-grey: #2A2A30;
+      --text: #E0DDD8;
+      --text-sub: #9A9590;
+      --bg: #121215;
+      --card-bg: #1E1E22;
+      --border: #3A3830;
+      --tag-server: #5A9EC8;
+      --tag-tech: #B8A878;
+      --tag-ops: #C85A8A;
+      --green: #5AAA78;
+    }
+  }
+  :root[data-theme="dark"] {
+    --navy: #A3B4D0;
+    --navy-mid: #7B93C0;
+    --gold: #D4A843;
+    --gold-light: #E8D5A3;
+    --cream: #1A1A1E;
+    --warm-grey: #2A2A30;
+    --text: #E0DDD8;
+    --text-sub: #9A9590;
+    --bg: #121215;
+    --card-bg: #1E1E22;
+    --border: #3A3830;
+    --tag-server: #5A9EC8;
+    --tag-tech: #B8A878;
+    --tag-ops: #C85A8A;
+    --green: #5AAA78;
+  }
+  :root[data-theme="light"] {
+    --navy: #1B2A4A;
+    --navy-mid: #2C3E6B;
+    --gold: #B8860B;
+    --gold-light: #D4A843;
+    --cream: #FAF8F5;
+    --warm-grey: #E8E2D8;
+    --text: #2A2A2A;
+    --text-sub: #5A5A5A;
+    --bg: #FFFFFF;
+    --card-bg: #FAFAF8;
+    --border: #DDD6CA;
+    --tag-server: #1B5E8A;
+    --tag-tech: #6B5B3A;
+    --tag-ops: #8A1B4A;
+    --green: #2D7A4F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+
+  .header-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .header h1 {
+    font-family: 'Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--text-sub);
+  }
+
+  .header-meta span::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-family: 'Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: 'Display', serif;
+    font-size: 0.85rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .section-num { background: var(--warm-grey); color: var(--gold); }
+  }
+  :root[data-theme="dark"] .section-num { background: var(--warm-grey); color: var(--gold); }
+  :root[data-theme="light"] .section-num { background: var(--navy); color: var(--gold-light); }
+
+  .section-intro {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  /* Item cards */
+  .item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+
+  .item-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .item-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .item-tag--server { background: rgba(27,94,138,0.1); color: var(--tag-server); }
+  .item-tag--tech { background: rgba(107,91,58,0.1); color: var(--tag-tech); }
+  .item-tag--ops { background: rgba(138,27,74,0.1); color: var(--tag-ops); }
+
+  @media (prefers-color-scheme: dark) {
+    .item-tag--server { background: rgba(90,158,200,0.15); }
+    .item-tag--tech { background: rgba(184,168,120,0.15); }
+    .item-tag--ops { background: rgba(200,90,138,0.15); }
+  }
+  :root[data-theme="dark"] .item-tag--server { background: rgba(90,158,200,0.15); }
+  :root[data-theme="dark"] .item-tag--tech { background: rgba(184,168,120,0.15); }
+  :root[data-theme="dark"] .item-tag--ops { background: rgba(200,90,138,0.15); }
+
+  .item-q {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .item-explain {
+    font-size: 0.82rem;
+    color: var(--text-sub);
+    line-height: 1.75;
+    margin-top: 4px;
+    padding-left: 0;
+  }
+
+  .item-explain strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .item-note {
+    font-size: 0.78rem;
+    color: var(--green);
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: rgba(45,122,79,0.06);
+    border-radius: 2px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .item-note { background: rgba(90,170,120,0.1); }
+  }
+  :root[data-theme="dark"] .item-note { background: rgba(90,170,120,0.1); }
+
+  /* Glossary */
+  .glossary {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 24px;
+    margin-top: 12px;
+  }
+
+  .glossary h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .glossary dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    font-size: 0.8rem;
+  }
+
+  .glossary dt {
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .glossary dd {
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  /* Agenda summary */
+  .summary-list {
+    list-style: none;
+    counter-reset: agenda;
+  }
+
+  .summary-list li {
+    counter-increment: agenda;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .summary-list li:last-child { border-bottom: none; }
+
+  .summary-list li::before {
+    content: counter(agenda);
+    font-family: 'Display', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    background: rgba(184,134,11,0.08);
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Diagram */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 20px 0;
+    overflow-x: auto;
+    font-size: 0.78rem;
+  }
+
+  .flow-step {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 14px;
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+
+  .flow-step-label {
+    font-weight: 500;
+    color: var(--navy);
+    font-size: 0.78rem;
+  }
+
+  .flow-step-sub {
+    color: var(--text-sub);
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+
+  .flow-arrow {
+    color: var(--gold);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    padding: 0 6px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-sub);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 24px 16px 60px; }
+    .header h1 { font-size: 1.25rem; }
+    .header-meta { flex-direction: column; gap: 4px; }
+    .glossary dl { grid-template-columns: 1fr; }
+    .glossary dt { margin-top: 8px; }
+    .flow-diagram { flex-wrap: wrap; gap: 4px; justify-content: center; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+
+<div class="page">
+
+  <header class="header">
+    <p class="header-eyebrow">Meeting Agenda</p>
+    <h1>60周年記念式典HP制作 打合せ議題</h1>
+    <div class="header-meta">
+      <span>8月20日（水）11:00 - Google Meet</span>
+      <span>株式会社明和 藤井様 + 専門家</span>
+    </div>
+  </header>
+
+  <!-- Agenda Overview -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">0</span>議題一覧</h2>
+    <ol class="summary-list">
+      <li>情報収集シートの修正提案</li>
+      <li>サーバーの接続情報（FTPアカウントなど）</li>
+      <li>サーバーの技術仕様の確認</li>
+      <li>公開URLとディレクトリ構成</li>
+      <li>素材の受け渡しフロー</li>
+      <li>今後のスケジュール</li>
+      <li>藤井さんへの返信メール（案）</li>
+    </ol>
+  </div>
+
+  <!-- Section 1: 情報収集シート -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">1</span>情報収集シートの修正提案</h2>
+    <p class="section-intro">藤井さんに作成いただいたシートについて、まだメールの返信をいただいていないので、まずここから確認します。制作側から3点の追加提案があります。</p>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">提案</span>
+        <span class="item-q">活動概要の文字数を「100〜150文字程度」と明記</span>
+      </div>
+      <div class="item-explain">
+        <strong>シートのどこか：</strong>シートの「② 主な活動」の表の下に「<strong>〇〇文字程度で記入してください。</strong>」と書かれていますが、〇〇が空欄のままです。ここに<strong>「100〜150」</strong>と入れてもらう提案です。<br><br>
+        <strong>なぜ100〜150文字か：</strong>サイト上の活動カードは写真の横に説明文が入るレイアウトです。50文字だと寂しく、200文字を超えるとスマホで読みきれません。100〜150文字がちょうどいいバランスです。
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">提案</span>
+        <span class="item-q">「単会の紹介文」の項目を追加（50〜100文字）</span>
+      </div>
+      <div class="item-explain">
+        <strong>シートのどこか：</strong>「① 基本情報」のテーブル（単会名・区分・部員数）に<strong>「紹介文」の行を1つ追加</strong>してもらう提案です。<br><br>
+        活動5つとは別に、単会全体をひとことで紹介する文章があると、ページ冒頭に掲載できて見栄えが良くなります。<br>
+        例：「〇〇商工会青年部は部員〇名で、地域の活性化を目指し〇〇を中心に活動しています。」
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">提案</span>
+        <span class="item-q">「写真の説明文」の列を追加（20文字程度）</span>
+      </div>
+      <div class="item-explain">
+        <strong>シートのどこか：</strong>「② 主な活動」の表に<strong>「写真の説明（20文字程度）」の列を1つ追加</strong>してもらう提案です。<br><br>
+        サイトでは写真にマウスを乗せるとキャプション（説明文）がふわっと表示される仕様にしています（スマホではタップで表示）。<br>
+        <strong>サンプル：</strong>
+        <a href="https://maoli1105.github.io/60th-anniversary-site/unit.html?id=akiota-youth" style="color:var(--gold);">単会ページで実際の動きを見る</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">2</span>サーバーの接続情報</h2>
+    <p class="section-intro">サイトを公開するには、県連のサーバーにファイルをアップロードする必要があります。そのための「鍵」をもらう必要があります。</p>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--server">サーバー</span>
+        <span class="item-q">FTPアカウントの発行をお願いしたい</span>
+      </div>
+      <div class="item-explain">
+        <strong>FTPとは：</strong>ファイルをサーバーにアップロードするための仕組みです。メールでいう「送信」のようなもの。サーバーに接続するには以下の3つが必要です：<br>
+        ・<strong>ホスト名</strong>（サーバーの住所。例：ftp.hint.or.jp）<br>
+        ・<strong>ユーザー名</strong>（ログインID）<br>
+        ・<strong>パスワード</strong><br>
+        これらを県連の事務局 or サーバー管理者から発行してもらいます。
+      </div>
+      <div class="item-note">公募要領に「FTPアカウント提供可」と記載あり。事務局に依頼すれば発行してもらえるはず。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--server">サーバー</span>
+        <span class="item-q">FTP? SFTP? どちらに対応しているか</span>
+      </div>
+      <div class="item-explain">
+        <strong>FTPとSFTPの違い：</strong>どちらもファイルをアップロードする方法ですが、<strong>SFTP</strong>は通信が暗号化されていて安全。FTPは暗号化なし。今は<strong>SFTPが標準</strong>なので、対応していればSFTPを使います。<br>
+        どちらでもこちらの作業は変わりません。専門家に「SFTPは使えますか？」と聞くだけでOKです。
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--server">サーバー</span>
+        <span class="item-q">アップロードの容量制限はあるか</span>
+      </div>
+      <div class="item-explain">
+        34単会 x 写真5枚 = 最大<strong>170枚</strong>の画像をアップロードします。1枚1MBとして約170MB。通常のサーバーなら問題ないサイズですが、念のため上限を確認します。
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">3</span>サーバーの技術仕様</h2>
+    <p class="section-intro">今回のサイトはHTML/CSS/JSだけの「静的サイト」なので、基本的にどんなサーバーでも動きます。ただし、いくつか知っておくと助かる情報があります。</p>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--tech">技術</span>
+        <span class="item-q">Webサーバーの種類は？（Apache / Nginx）</span>
+      </div>
+      <div class="item-explain">
+        <strong>Webサーバーとは：</strong>ブラウザからアクセスがあった時に、HTMLや画像を返してくれるソフトウェアです。代表的なものが2つ：<br>
+        ・<strong>Apache（アパッチ）</strong>：昔からある定番。日本の官公庁やレンタルサーバーで多い<br>
+        ・<strong>Nginx（エンジンエックス）</strong>：新しめで高速。最近のサーバーに多い<br><br>
+        <strong>なぜ聞くのか：</strong>Apacheの場合「<strong>.htaccess</strong>」という設定ファイルで、URLのリダイレクトやエラーページのカスタマイズができます。Nginxだと別の方法が必要です。<br>
+        ※ 今回は必須ではないので「何を使っていますか？」と軽く聞くだけで大丈夫です。
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--tech">技術</span>
+        <span class="item-q">SSL（HTTPS）は対応済みか</span>
+      </div>
+      <div class="item-explain">
+        <strong>SSLとは：</strong>URLが「<strong>https://</strong>」で始まるサイトは、通信が暗号化されています（南京錠マークが出るやつ）。「http://」だと「保護されていません」と警告が出てしまいます。<br>
+        公募要領に「SSL対応」とあるので、県連サーバー側で証明書が用意されているか確認します。
+      </div>
+      <div class="item-note">通常、サーバー管理者側で対応する部分。こちらで作業は不要。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--tech">技術</span>
+        <span class="item-q">PHPやCGIは使えるか（参考程度）</span>
+      </div>
+      <div class="item-explain">
+        <strong>PHPやCGIとは：</strong>サーバー上でプログラムを動かす仕組みです。例えばお問い合わせフォームの送信処理などに使います。<br>
+        <strong>今回は使いません</strong>（静的なHTMLだけで完結するため）。ただし将来的に機能追加の可能性がある場合は、使えるかどうか知っておくと便利です。<br>
+        ※ 聞かなくてもOK。専門家が同席しているので、話の流れで出れば確認する程度。
+      </div>
+    </div>
+
+    <div class="glossary">
+      <h3>用語まとめ</h3>
+      <dl>
+        <dt>FTP / SFTP</dt>
+        <dd>サーバーにファイルを送る方法。SFTPは暗号化あり（安全）。</dd>
+        <dt>Apache / Nginx</dt>
+        <dd>サーバーソフトの種類。どちらでも今回のサイトは動く。</dd>
+        <dt>SSL（HTTPS）</dt>
+        <dd>通信の暗号化。「https://」にするための証明書が必要。</dd>
+        <dt>.htaccess</dt>
+        <dd>Apacheで使える設定ファイル。URL転送やエラーページの設定ができる。</dd>
+        <dt>PHP / CGI</dt>
+        <dd>サーバー上でプログラムを動かす仕組み。今回は不要。</dd>
+        <dt>静的サイト</dt>
+        <dd>HTML/CSS/JSだけで作られたサイト。サーバーでプログラムが動かないシンプルな構成。表示が速く、セキュリティリスクも低い。</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">4</span>公開URLとディレクトリ構成</h2>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--server">サーバー</span>
+        <span class="item-q">サイトの公開URLはどうなるか</span>
+      </div>
+      <div class="item-explain">
+        県連のドメイン（hint.or.jp）の下に作られると思いますが、具体的なURLを確認します。<br>
+        ・例1：<strong>https://hint.or.jp/60th/</strong>（サブディレクトリ方式）<br>
+        ・例2：<strong>https://60th.hint.or.jp/</strong>（サブドメイン方式）<br>
+        どちらかによって、サイト内のリンクの書き方が少し変わります。
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--server">サーバー</span>
+        <span class="item-q">アップロード先のフォルダはどこか</span>
+      </div>
+      <div class="item-explain">
+        FTPで接続した後、どのフォルダにファイルを置けば公開されるかを確認します。<br>
+        通常は <strong>/public_html/</strong> や <strong>/htdocs/</strong> といったフォルダの中に、60周年用のフォルダを作ってその中にアップロードします。
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">5</span>素材の受け渡しフロー</h2>
+    <p class="section-intro">各単会から集まった写真やテキストを、どういう流れで制作側（パズル）に届けるかを決めておきます。</p>
+
+    <div class="flow-diagram">
+      <div class="flow-step">
+        <div class="flow-step-label">各単会</div>
+        <div class="flow-step-sub">シート記入 + 写真</div>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <div class="flow-step-label">県連事務局</div>
+        <div class="flow-step-sub">取りまとめ・確認</div>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <div class="flow-step-label">藤井さん</div>
+        <div class="flow-step-sub">整理・チェック</div>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <div class="flow-step-label">パズル（毛利）</div>
+        <div class="flow-step-sub">サイトに反映</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">運用</span>
+        <span class="item-q">素材の共有方法は？</span>
+      </div>
+      <div class="item-explain">
+        170枚の写真をメール添付は厳しいので、<strong>Googleドライブ</strong>や<strong>ギガファイル便</strong>など、ファイル共有サービスの利用を提案します。<br>
+        事務局で取りまとめてもらい、一括で共有してもらうのが効率的です。
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">運用</span>
+        <span class="item-q">素材は一括？随時？</span>
+      </div>
+      <div class="item-explain">
+        9/30の締切後にまとめて受け取るか、届いた分から随時もらうか。<br>
+        <strong>おすすめ：</strong>締切後に一括受領。途中で受け取ると差し替えが発生しやすい。
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">6</span>今後のスケジュール</h2>
+
+    <div class="item">
+      <div class="item-explain" style="font-size:0.85rem;">
+        <strong>9/30（水）</strong> 各単会からの素材提出締切<br>
+        <strong>10月上旬</strong> 素材受領 → サイトへの流し込み開始<br>
+        <strong>10月中旬</strong> テストサイトで確認・修正<br>
+        <strong>11月</strong> 最終確認 → 本番サーバーへ公開<br>
+        <strong>令和9年 2/6（土）</strong> 記念式典当日
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">運用</span>
+        <span class="item-q">公開後の修正権限について</span>
+      </div>
+      <div class="item-explain">誤字や写真の差し替えが発生した場合、こちらで直接FTPでアップロードして修正できるか。<br>それとも県連経由で依頼する必要があるか。</div>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-tag item-tag--ops">運用</span>
+        <span class="item-q">式典後のサイトはどうするか</span>
+      </div>
+      <div class="item-explain">一定期間で閉鎖するのか、アーカイブとして残すのか。契約内容に「公開後3ヶ月の軽微修正」を含めているので、その後の扱いを確認します。</div>
+    </div>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="section">
+    <h2 class="section-title"><span class="section-num">7</span>藤井さんへの返信メール（案）</h2>
+    <p class="section-intro">打合せ後、以下の内容で返信する予定です。打合せの結果に応じて内容を調整します。</p>
+
+    <div class="item" style="background: var(--cream); font-size: 0.84rem; line-height: 1.9;">
+      <p style="margin-bottom:12px;">株式会社明和<br>代表取締役 藤井利彦 様</p>
+
+      <p style="margin-bottom:12px;">お世話になっております。<br>株式会社パズルの毛利です。</p>
+
+      <p style="margin-bottom:12px;">情報収集シートの作成ありがとうございます。<br>確認しましたところ、よくまとまっていると思います。</p>
+
+      <p style="margin-bottom:8px;">サイトの制作側から何点かご提案がありますので、ご確認ください。</p>
+
+      <p style="margin-bottom:4px;"><strong>1. 活動概要の文字数目安</strong></p>
+      <p style="margin-bottom:12px;">「〇〇文字程度」の部分ですが、サイトのレイアウト上 <strong>100〜150文字程度</strong> が最も見やすくなります。</p>
+
+      <p style="margin-bottom:4px;"><strong>2. 単会の紹介文の追加</strong></p>
+      <p style="margin-bottom:12px;">活動5つとは別に、単会全体の紹介文（50〜100文字程度）があるとページ冒頭に掲載できて見栄えが良くなります。<br>
+      例：「〇〇商工会青年部は部員〇名で、地域の活性化を目指し〇〇を中心に活動しています。」</p>
+
+      <p style="margin-bottom:4px;"><strong>3. 写真の説明文（キャプション）の追加</strong></p>
+      <p style="margin-bottom:12px;">サイト上では、写真にマウスを乗せると活動名と簡単な説明文がオーバーレイ表示される仕様にしています（スマホではタップで表示）。<br>
+      活動の表に「写真の説明（20文字程度）」の列を1つ追加いただけると助かります。</p>
+
+      <p style="margin-bottom:8px;">なお、単会ページのテンプレートをサンプルサイトに反映しました。<br>以下のURLからイメージをご確認いただけます。</p>
+
+      <p style="margin-bottom:4px;"><strong>トップページ（単会の活動セクションからリンク）</strong><br>
+      <a href="https://maoli1105.github.io/60th-anniversary-site/" style="color:var(--gold);">https://maoli1105.github.io/60th-anniversary-site/</a></p>
+
+      <p style="margin-bottom:12px;"><strong>単会ページ（サンプル）</strong><br>
+      <a href="https://maoli1105.github.io/60th-anniversary-site/unit.html?id=akiota-youth" style="color:var(--gold);">https://maoli1105.github.io/60th-anniversary-site/unit.html?id=akiota-youth</a></p>
+
+      <ul style="margin-bottom:12px; padding-left:20px; color:var(--text-sub);">
+        <li>写真エリアにマウスを乗せるとキャプションが表示されます</li>
+        <li>各単会のデータはJSONファイルで一元管理しており、シートの情報をそのまま流し込める構成です</li>
+        <li>写真やテキストはすべてサンプルですので、実際の内容は各単会からの提供後に差し替えます</li>
+      </ul>
+
+      <p style="margin-bottom:12px;">お盆明けの打合せの際に、上記の内容も合わせてご相談できればと思います。<br>日程についてはご都合の良い日をお知らせいただければ調整いたします。</p>
+
+      <p style="margin-bottom:12px;">よろしくお願いいたします。</p>
+
+      <p style="font-size:0.8rem; color:var(--text-sub); border-top:1px solid var(--border); padding-top:10px;">
+        株式会社パズル<br>
+        毛利 哲也<br>
+        TEL：080-3494-7979<br>
+        Mail：maoli1105@gmail.com
+      </p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    株式会社パズル / 毛利哲也 / 2026-08-20 作成
+  </footer>
+
+</div>

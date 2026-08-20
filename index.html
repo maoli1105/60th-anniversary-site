@@ -162,7 +162,14 @@
             広島県商工会青年部連合会は、創立60周年を迎えることができました。
             これもひとえに、関係各位の皆様のご支援の賜物と、心より感謝申し上げます...
           </p>
-          <a href="#" class="greeting-link">全文を読む</a>
+          <button type="button" class="greeting-link" data-modal="greeting-youth">全文を読む</button>
+          <div class="greeting-fulltext" id="greeting-youth" hidden>
+            <p>広島県商工会青年部連合会は、創立60周年を迎えることができました。これもひとえに、関係各位の皆様のご支援の賜物と、心より感謝申し上げます。</p>
+            <p>私たち青年部は、「地域を元気に、日本を元気に」を合言葉に、広島県内の各商工会青年部とともに歩んでまいりました。60年の歴史の中で、先輩方が築いてこられた伝統と実績を礎に、時代の変化に対応しながら、地域経済の発展に貢献してまいりました。</p>
+            <p>近年は、人口減少や高齢化、デジタル化の進展など、地域を取り巻く環境は大きく変化しております。こうした中にあっても、青年部員一人ひとりが地域のリーダーとして、新たな発想と行動力をもって課題解決に取り組んでおります。</p>
+            <p>この記念すべき節目にあたり、これまでの60年を振り返るとともに、次の時代に向けた新たな一歩を踏み出す決意を新たにしております。今後とも変わらぬご支援、ご鞭撻を賜りますようお願い申し上げます。</p>
+            <p class="greeting-fulltext-sign">広島県商工会青年部連合会<br>会長 奥本 隆三</p>
+          </div>
         </div>
         <div class="greeting-card greeting-card--women">
           <div class="greeting-photo">写真</div>
@@ -173,9 +180,17 @@
             広島県商工会女性部連合会は、本年をもちまして創立60周年の節目を迎えます。
             長きにわたり地域の商工業発展に尽力してまいりました...
           </p>
-          <a href="#" class="greeting-link">全文を読む</a>
+          <button type="button" class="greeting-link" data-modal="greeting-women">全文を読む</button>
+          <div class="greeting-fulltext" id="greeting-women" hidden>
+            <p>広島県商工会女性部連合会は、本年をもちまして創立60周年の節目を迎えます。長きにわたり地域の商工業発展に尽力してまいりました先輩方のご努力に、深く敬意を表します。</p>
+            <p>女性部は、地域に根ざした商工業者の女性が集い、経営力の向上と地域社会への貢献を目指して活動を続けてまいりました。家庭と仕事を両立しながら、地域の課題に真摯に向き合い、きめ細やかな視点で解決策を生み出してきたことは、私たちの大きな誇りです。</p>
+            <p>子育て支援、高齢者の見守り、特産品の開発、環境美化活動など、女性部ならではの活動は地域になくてはならないものとなっております。これからも「つなぐ、支える、輝く」を胸に、地域とともに歩んでまいります。</p>
+            <p>60周年という大きな節目を迎え、これまで支えてくださったすべての方々に心より御礼申し上げますとともに、今後ともご指導ご鞭撻を賜りますようお願い申し上げます。</p>
+            <p class="greeting-fulltext-sign">広島県商工会女性部連合会<br>会長 松井 美椰子</p>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -499,6 +514,22 @@
       </p>
     </div>
   </footer>
+
+  <!-- 挨拶モーダル（transform の影響を避けるため body 直下に配置） -->
+  <div class="greeting-modal-overlay" id="greeting-modal">
+    <div class="greeting-modal">
+      <button class="greeting-modal-close" aria-label="閉じる">&times;</button>
+      <div class="greeting-modal-header">
+        <div class="greeting-modal-photo">写真</div>
+        <div class="greeting-modal-meta">
+          <p class="greeting-modal-division"></p>
+          <p class="greeting-modal-position">会長</p>
+          <h3 class="greeting-modal-name"></h3>
+        </div>
+      </div>
+      <div class="greeting-modal-body"></div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

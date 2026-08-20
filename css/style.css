@@ -534,15 +534,182 @@ a {
 .greeting-link {
   display: inline-block;
   font-size: 0.8rem;
+  font-family: var(--font-body);
   color: var(--color-gold);
   letter-spacing: 0.1em;
+  background: none;
+  border: none;
   border-bottom: 1px solid var(--color-gold);
-  padding-bottom: 2px;
+  padding: 0 0 2px;
+  cursor: pointer;
   transition: opacity 0.3s;
 }
 
 .greeting-link:hover {
   opacity: 0.7;
+}
+
+.greeting-fulltext {
+  display: none;
+}
+
+/* ============================================
+   挨拶モーダル
+   ============================================ */
+
+.greeting-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transition: background 0.35s ease;
+}
+
+.greeting-modal-overlay.is-active {
+  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.greeting-modal {
+  background: var(--color-white);
+  max-width: 640px;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  position: relative;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.greeting-modal-overlay.is-active .greeting-modal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.greeting-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  z-index: 1;
+}
+
+.greeting-modal-close:hover {
+  color: var(--color-text);
+}
+
+.greeting-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 40px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.greeting-modal-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #E8DCC8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  flex-shrink: 0;
+}
+
+.greeting-modal-meta {
+  flex: 1;
+}
+
+.greeting-modal-division {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 2px;
+}
+
+.greeting-modal--youth .greeting-modal-division {
+  color: var(--color-youth);
+}
+
+.greeting-modal--women .greeting-modal-division {
+  color: var(--color-women);
+}
+
+.greeting-modal-position {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-bottom: 4px;
+}
+
+.greeting-modal-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-navy);
+}
+
+.greeting-modal-body {
+  padding: 32px 40px 40px;
+}
+
+.greeting-modal-body p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: var(--color-text);
+  margin-bottom: 16px;
+  text-indent: 1em;
+}
+
+.greeting-modal-body p:last-child {
+  margin-bottom: 0;
+}
+
+.greeting-modal-body .greeting-fulltext-sign {
+  text-indent: 0;
+  text-align: right;
+  margin-top: 32px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--color-navy);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .greeting-modal-header {
+    padding: 32px 24px 20px;
+    gap: 16px;
+  }
+
+  .greeting-modal-photo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .greeting-modal-body {
+    padding: 24px 24px 32px;
+  }
+
+  .greeting-modal-name {
+    font-size: 1.1rem;
+  }
 }
 
 

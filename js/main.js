@@ -339,4 +339,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================
+  // 挨拶モーダル
+  // ==========================================
+  const modal = document.getElementById('greeting-modal');
+  if (modal) {
+    const modalBody = modal.querySelector('.greeting-modal-body');
+    const modalName = modal.querySelector('.greeting-modal-name');
+    const modalDiv = modal.querySelector('.greeting-modal-division');
+    const modalClose = modal.querySelector('.greeting-modal-close');
+
+    // 開く
+    document.querySelectorAll('.greeting-link[data-modal]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const sourceId = link.dataset.modal;
+        const source = document.getElementById(sourceId);
+        if (!source) return;
+
+        // カードから情報を取得
+        const card = link.closest('.greeting-card');
+        modalName.textContent = card.querySelector('.greeting-name').textContent;
+        modalDiv.textContent = card.querySelector('.greeting-division').textContent;
+
+        // モーダルにタイプクラスを設定
+        modal.querySelector('.greeting-modal').className = 'greeting-modal';
+        if (card.classList.contains('greeting-card--youth')) {
+          modal.querySelector('.greeting-modal').classList.add('greeting-modal--youth');
+        } else {
+          modal.querySelector('.greeting-modal').classList.add('greeting-modal--women');
+        }
+
+        // 全文をコピー
+        modalBody.innerHTML = source.innerHTML;
+
+        document.body.style.overflow = 'hidden';
+        modal.classList.add('is-active');
+      });
+    });
+
+    // 閉じる
+    function closeModal() {
+      modal.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-active')) closeModal();
+    });
+  }
+
 });
