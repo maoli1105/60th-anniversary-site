@@ -585,6 +585,12 @@ a {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.35s ease, transform 0.35s ease;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.greeting-modal::-webkit-scrollbar {
+  display: none;
 }
 
 .greeting-modal-overlay.is-active .greeting-modal {
