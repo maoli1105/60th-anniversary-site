@@ -139,46 +139,55 @@
     // ==========================================
     const gallery = document.getElementById('unit-gallery');
 
-    function createPhotoCard(act, index) {
-      const div = document.createElement('div');
-      div.className = 'unit-photo';
-      div.style.opacity = '0';
-      div.style.transform = 'translateY(20px)';
-      div.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    function createActivityCard(act, index) {
+      const card = document.createElement('div');
+      card.className = 'activity-item';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 
-      div.innerHTML =
+      // 写真部分
+      const photo = document.createElement('div');
+      photo.className = 'unit-photo';
+      photo.innerHTML =
         '<div class="photo-placeholder">写真 ' + (index+1) + '</div>' +
         '<div class="photo-caption">' +
-          '<span class="caption-title">' + act.title + '</span>' +
-          '<span class="caption-text">' + act.description + '</span>' +
+          '<span class="caption-text">' + (act.caption || act.title) + '</span>' +
         '</div>';
 
-      // 写真がある場合は img を追加し、読み込めたらプレースホルダーを隠す
       if (act.photo && !act.photo.includes('placeholder')) {
         const img = new Image();
         img.alt = act.caption || act.title;
         img.onload = function() {
-          const placeholder = div.querySelector('.photo-placeholder');
+          const placeholder = photo.querySelector('.photo-placeholder');
           if (placeholder) placeholder.style.display = 'none';
-          div.insertBefore(img, div.firstChild);
+          photo.insertBefore(img, photo.firstChild);
         };
         img.src = act.photo;
       }
 
-      gallery.appendChild(div);
+      // テキスト部分（活動名 + 概要）
+      const info = document.createElement('div');
+      info.className = 'activity-info';
+      info.innerHTML =
+        '<h3 class="activity-info-title">' + act.title + '</h3>' +
+        '<p class="activity-info-desc">' + act.description + '</p>';
 
-      // スタガー登場アニメーション
+      card.appendChild(photo);
+      card.appendChild(info);
+      gallery.appendChild(card);
+
       setTimeout(() => {
-        div.style.opacity = '1';
-        div.style.transform = 'translateY(0)';
-      }, 100 + index * 120);
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 + index * 150);
     }
 
     if (unit.activities && unit.activities.length > 0) {
-      unit.activities.forEach((act, i) => createPhotoCard(act, i));
+      unit.activities.forEach((act, i) => createActivityCard(act, i));
     } else {
       for (let i = 0; i < 5; i++) {
-        createPhotoCard({ title: '活動 ' + (i+1), description: '情報収集中です。', photo: '' }, i);
+        createActivityCard({ title: '活動 ' + (i+1), description: '情報収集中です。', caption: '', photo: '' }, i);
       }
     }
 

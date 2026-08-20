@@ -846,10 +846,47 @@ a {
 }
 
 .unit-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   margin-bottom: 48px;
+}
+
+/* 活動カード（写真 + 説明） */
+.activity-item {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: start;
+  background: var(--color-white);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.activity-item:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.activity-info {
+  padding: 20px 24px 20px 0;
+}
+
+.activity-info-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-gold-pale);
+}
+
+.activity-info-desc {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.8;
 }
 
 .unit-section-title {
@@ -912,20 +949,12 @@ a {
   transform: translateY(0);
 }
 
-.caption-title {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-gold-light);
-  margin-bottom: 4px;
-}
-
 .caption-text {
   display: block;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.5;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.4;
+  font-weight: 400;
 }
 
 .unit-nav {
@@ -1647,7 +1676,15 @@ a.activity-card {
   }
 
   .unit-gallery {
+    gap: 24px;
+  }
+
+  .activity-item {
     grid-template-columns: 1fr;
+  }
+
+  .activity-info {
+    padding: 16px 20px 20px;
   }
 
   .chart-bars {
