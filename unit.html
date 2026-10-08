@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260820">
+  <link rel="stylesheet" href="css/style.css?v=20261008">
 </head>
 <body>
 
@@ -131,8 +131,17 @@
     tag.className = 'unit-tag unit-tag--' + unit.type;
 
     document.getElementById('unit-title').textContent = unit.name;
-    document.getElementById('unit-area').textContent = unit.area;
-    document.getElementById('unit-description').textContent = unit.description;
+    let areaText = unit.chikyoName;
+    if (unit.members) {
+      areaText += '　／　部員数 ' + unit.members + '名（令和8年9月1日時点' + (unit.membersNote ? '・' + unit.membersNote : '') + '）';
+    }
+    document.getElementById('unit-area').textContent = areaText;
+    const descEl = document.getElementById('unit-description');
+    if (unit.description) {
+      descEl.textContent = unit.description;
+    } else {
+      descEl.style.display = 'none';
+    }
 
     // ==========================================
     // 活動ギャラリー生成
@@ -146,34 +155,34 @@
       card.style.transform = 'translateY(20px)';
       card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 
-      // 写真部分
-      const photo = document.createElement('div');
-      photo.className = 'unit-photo';
-      photo.innerHTML =
-        '<div class="photo-placeholder">写真 ' + (index+1) + '</div>' +
-        '<div class="photo-caption">' +
-          '<span class="caption-text">' + (act.caption || act.title) + '</span>' +
-        '</div>';
-
-      if (act.photo && !act.photo.includes('placeholder')) {
+      if (act.photo) {
+        const photo = document.createElement('div');
+        photo.className = 'unit-photo';
         const img = new Image();
-        img.alt = act.caption || act.title;
+        img.alt = act.title;
+        img.loading = 'lazy';
         img.onload = function() {
-          const placeholder = photo.querySelector('.photo-placeholder');
-          if (placeholder) placeholder.style.display = 'none';
-          photo.insertBefore(img, photo.firstChild);
+          // 縦長・正方形に近い写真は切れないよう全体を表示する
+          if (img.naturalWidth / img.naturalHeight < 1.15) img.classList.add('is-contain');
         };
         img.src = act.photo;
+        photo.appendChild(img);
+        card.appendChild(photo);
+      } else {
+        card.classList.add('activity-item--text');
       }
 
-      // テキスト部分（活動名 + 概要）
       const info = document.createElement('div');
       info.className = 'activity-info';
-      info.innerHTML =
-        '<h3 class="activity-info-title">' + act.title + '</h3>' +
-        '<p class="activity-info-desc">' + act.description + '</p>';
+      const title = document.createElement('h3');
+      title.className = 'activity-info-title';
+      title.textContent = act.title;
+      const desc = document.createElement('p');
+      desc.className = 'activity-info-desc';
+      desc.textContent = act.description;
+      info.appendChild(title);
+      info.appendChild(desc);
 
-      card.appendChild(photo);
       card.appendChild(info);
       gallery.appendChild(card);
 
@@ -183,38 +192,23 @@
       }, 100 + index * 150);
     }
 
-    if (unit.activities && unit.activities.length > 0) {
-      unit.activities.forEach((act, i) => createActivityCard(act, i));
-    } else {
-      for (let i = 0; i < 5; i++) {
-        createActivityCard({ title: '活動 ' + (i+1), description: '情報収集中です。', caption: '', photo: '' }, i);
-      }
-    }
+    unit.activities.forEach((act, i) => createActivityCard(act, i));
 
     // ==========================================
     // 関連リンク
     // ==========================================
-    if (unit.links && (unit.links.hp || unit.links.sns)) {
-      const linksSection = document.getElementById('unit-links');
+    if (unit.links && unit.links.length > 0) {
       const linksList = document.getElementById('unit-links-list');
-      linksSection.style.display = '';
-
-      if (unit.links.hp) {
+      document.getElementById('unit-links').style.display = '';
+      unit.links.forEach((link) => {
         const a = document.createElement('a');
-        a.href = unit.links.hp;
+        a.href = link.url;
         a.target = '_blank';
+        a.rel = 'noopener';
         a.className = 'unit-link-item';
-        a.textContent = 'ホームページ';
+        a.textContent = link.label;
         linksList.appendChild(a);
-      }
-      if (unit.links.sns) {
-        const a = document.createElement('a');
-        a.href = unit.links.sns;
-        a.target = '_blank';
-        a.className = 'unit-link-item';
-        a.textContent = 'SNS';
-        linksList.appendChild(a);
-      }
+      });
     }
 
     // ==========================================
@@ -252,29 +246,6 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ==========================================
-    // キャプション（スマホ: タップ切替）
-    // ==========================================
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) {
-      document.querySelectorAll('.unit-photo').forEach(photo => {
-        photo.addEventListener('click', (e) => {
-          document.querySelectorAll('.unit-photo.caption-active').forEach(p => {
-            if (p !== photo) p.classList.remove('caption-active');
-          });
-          photo.classList.toggle('caption-active');
-        });
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.unit-photo')) {
-          document.querySelectorAll('.unit-photo.caption-active').forEach(p => {
-            p.classList.remove('caption-active');
-          });
-        }
-      });
-    }
 
     // ==========================================
     // モバイルナビ

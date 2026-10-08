@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260820">
+  <link rel="stylesheet" href="css/style.css?v=20261008d">
 </head>
 <body>
 
@@ -417,76 +417,23 @@
 
       <div class="activity-filter">
         <button class="filter-btn is-active" data-filter="all">すべて</button>
-        <button class="filter-btn" data-filter="youth">青年部</button>
-        <button class="filter-btn" data-filter="women">女性部</button>
+        <button class="filter-btn" data-filter="chikyo" aria-expanded="false" aria-controls="chikyo-filter">地協</button>
+      </div>
+      <div class="chikyo-filter" id="chikyo-filter"></div>
+
+      <div class="chikyo-map" id="chikyo-map">
+        <div class="chikyo-map-info">
+          <p class="chikyo-map-name" id="chikyo-map-name"></p>
+          <p class="chikyo-map-roman" id="chikyo-map-roman"></p>
+          <ul class="chikyo-map-units" id="chikyo-map-units"></ul>
+        </div>
+        <div class="chikyo-map-figure">
+          <svg id="chikyo-map-svg" role="img" aria-label="広島県内の地域協議会の区域図"></svg>
+          <p class="chikyo-map-hint" id="chikyo-map-hint"></p>
+        </div>
       </div>
 
-      <div class="activity-grid">
-        <a href="unit.html?id=akiota-youth" class="activity-card" data-type="youth">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--youth">青年部</span>
-            <h3 class="activity-name">安芸太田町商工会 青年部</h3>
-            <p class="activity-area">安芸太田町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=akiota-women" class="activity-card" data-type="women">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--women">女性部</span>
-            <h3 class="activity-name">安芸太田町商工会 女性部</h3>
-            <p class="activity-area">安芸太田町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=kitahiroshima-youth" class="activity-card" data-type="youth">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--youth">青年部</span>
-            <h3 class="activity-name">北広島町商工会 青年部</h3>
-            <p class="activity-area">北広島町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=kitahiroshima-women" class="activity-card" data-type="women">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--women">女性部</span>
-            <h3 class="activity-name">北広島町商工会 女性部</h3>
-            <p class="activity-area">北広島町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=sera-youth" class="activity-card" data-type="youth">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--youth">青年部</span>
-            <h3 class="activity-name">世羅町商工会 青年部</h3>
-            <p class="activity-area">世羅町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=sera-women" class="activity-card" data-type="women">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--women">女性部</span>
-            <h3 class="activity-name">世羅町商工会 女性部</h3>
-            <p class="activity-area">世羅町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=fuchu-youth" class="activity-card" data-type="youth">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--youth">青年部</span>
-            <h3 class="activity-name">府中町商工会 青年部</h3>
-            <p class="activity-area">府中町</p>
-          </div>
-        </a>
-        <a href="unit.html?id=fuchu-women" class="activity-card" data-type="women">
-          <div class="activity-thumb">活動写真</div>
-          <div class="activity-body">
-            <span class="activity-tag activity-tag--women">女性部</span>
-            <h3 class="activity-name">府中町商工会 女性部</h3>
-            <p class="activity-area">府中町</p>
-          </div>
-        </a>
-      </div>
+      <div class="activity-groups" id="activity-groups"></div>
     </div>
   </section>
 
@@ -531,6 +478,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=20260820"></script>
+  <script src="js/main.js?v=20261008d"></script>
 </body>
 </html>

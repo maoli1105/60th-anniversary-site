@@ -86,36 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelectorAll(
-    '.fade-in, .fade-in-left, .fade-in-right, .program-item, .greeting-card, .timeline-item, .activity-card, .section-divider'
+    '.fade-in, .fade-in-left, .fade-in-right, .program-item, .greeting-card, .timeline-item, .section-divider'
   ).forEach((el, i) => {
     el.style.setProperty('--i', i % 8);
     observer.observe(el);
   });
-
-  // ==========================================
-  // Activity Card Stagger
-  // ==========================================
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const cards = entry.target.querySelectorAll('.activity-card');
-        cards.forEach((card, i) => {
-          setTimeout(() => {
-            card.classList.add('is-visible');
-          }, i * 100);
-        });
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  const activityGrid = document.querySelector('.activity-grid');
-  if (activityGrid) {
-    activityGrid.querySelectorAll('.activity-card').forEach(c => {
-      c.classList.remove('is-visible');
-    });
-    cardObserver.observe(activityGrid);
-  }
 
   // ==========================================
   // Timeline Grow
@@ -229,34 +204,196 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // Activity Filter
+  // 単会一覧（data/units.json から地協名簿順に生成）
   // ==========================================
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const filter = btn.dataset.filter;
-      const cards = document.querySelectorAll('.activity-card');
-      cards.forEach(card => {
-        card.style.transition = 'opacity 0.25s ease';
-        card.style.opacity = '0';
+  const groupsEl = document.getElementById('activity-groups');
+  if (groupsEl) {
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text) n.textContent = text;
+      return n;
+    };
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          cardObserver.unobserve(entry.target);
+        }
       });
-      setTimeout(() => {
-        let delay = 0;
-        cards.forEach(card => {
-          if (filter === 'all' || card.dataset.type === filter) {
-            card.style.display = '';
-            setTimeout(() => {
-              card.style.opacity = '1';
-            }, delay);
-            delay += 80;
-          } else {
-            card.style.display = 'none';
-          }
+    }, { threshold: 0.1 });
+
+    Promise.all([
+      fetch('data/units.json').then(r => r.json()),
+      fetch('data/map.json').then(r => r.json())
+    ]).then(([units, mapData]) => {
+      const groups = [];
+      units.forEach((u) => {
+        let g = groups.find(x => x.key === u.chikyo);
+        if (!g) { g = { key: u.chikyo, name: u.chikyoName, cards: [] }; groups.push(g); }
+        let c = g.cards.find(x => x.name === u.shokokai);
+        if (!c) { c = { name: u.shokokai, units: [] }; g.cards.push(c); }
+        c.units.push(u);
+      });
+
+      const chipRow = document.getElementById('chikyo-filter');
+      groups.forEach((g) => {
+        const section = el('div', 'activity-group');
+        section.dataset.chikyo = g.key;
+        const title = el('h3', 'activity-group-title', g.name);
+        title.appendChild(el('span', 'activity-group-count', g.cards.length + '単会'));
+        section.appendChild(title);
+
+        const grid = el('div', 'activity-grid');
+        g.cards.forEach((c) => {
+          const card = el('div', 'activity-card');
+          card.dataset.shokokai = c.name;
+          card.appendChild(el('h4', 'activity-card-name', c.name));
+          const tiles = el('div', 'activity-tiles');
+          c.units.forEach((u) => {
+            const tile = el('a', 'activity-tile activity-tile--' + u.type);
+            tile.href = 'unit.html?id=' + encodeURIComponent(u.id);
+            if (u.thumb) {
+              const img = el('img');
+              img.src = u.thumb;
+              img.alt = u.name;
+              img.loading = 'lazy';
+              tile.appendChild(img);
+            }
+            tile.appendChild(el('span', 'activity-tile-label', u.type === 'youth' ? '青年部' : '女性部'));
+            tiles.appendChild(tile);
+          });
+          card.appendChild(tiles);
+          grid.appendChild(card);
+          cardObserver.observe(card);
         });
-      }, 250);
+        section.appendChild(grid);
+        groupsEl.appendChild(section);
+
+        const chip = el('button', 'chikyo-chip', g.name.replace('地域協議会', ''));
+        chip.type = 'button';
+        chip.dataset.chikyo = g.key;
+        chipRow.appendChild(chip);
+      });
+
+      // ---------- 地協マップ ----------
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const ROMAN = { geinan: 'GEINAN', geihoku: 'GEIHOKU', chuo: 'CHUOH', binan: 'BINAN', bihoku: 'BIHOKU' };
+      const HINT = '地図の地域を押すと、その地協に切り替わります';
+      const mapPanel = document.getElementById('chikyo-map');
+      const mapSvg = document.getElementById('chikyo-map-svg');
+      const mapName = document.getElementById('chikyo-map-name');
+      const mapRoman = document.getElementById('chikyo-map-roman');
+      const mapUnits = document.getElementById('chikyo-map-units');
+      const mapHint = document.getElementById('chikyo-map-hint');
+      let current = null;
+
+      mapSvg.setAttribute('viewBox', mapData.viewBox);
+      mapHint.textContent = HINT;
+      const land = document.createElementNS(SVG_NS, 'path');
+      land.setAttribute('d', mapData.land);
+      land.setAttribute('class', 'map-land');
+      mapSvg.appendChild(land);
+      const regions = {};
+      mapData.regions.slice().sort((a, b) => a.cx - b.cx).forEach((r, i) => {
+        const path = document.createElementNS(SVG_NS, 'path');
+        path.setAttribute('d', r.d);
+        path.setAttribute('class', 'map-region');
+        path.style.setProperty('--i', i);
+        path.dataset.chikyo = r.chikyo;
+        path.dataset.unit = r.unit;
+        mapSvg.appendChild(path);
+        regions[r.unit + '商工会'] = path;
+      });
+
+      const goToCard = (name) => {
+        const card = [...groupsEl.querySelectorAll('.activity-card')].find(c => c.dataset.shokokai === name);
+        if (!card) return;
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('is-flash');
+        setTimeout(() => card.classList.remove('is-flash'), 1600);
+      };
+      const hover = (name, on) => {
+        if (regions[name]) regions[name].classList.toggle('is-hover', on);
+        mapHint.textContent = on ? name : HINT;
+        mapHint.classList.toggle('is-unit', on);
+      };
+
+      const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+      const chikyoBtn = document.querySelector('.filter-btn[data-filter="chikyo"]');
+      const show = (key) => {
+        current = key;
+        groupsEl.querySelectorAll('.activity-group').forEach((s) => {
+          s.style.display = (!key || s.dataset.chikyo === key) ? '' : 'none';
+        });
+        chipRow.querySelectorAll('.chikyo-chip').forEach((c) => {
+          c.classList.toggle('is-active', c.dataset.chikyo === key);
+        });
+        const g = groups.find(x => x.key === key);
+        Object.values(regions).forEach(p => p.classList.remove('is-active'));
+        mapUnits.textContent = '';
+        mapName.textContent = g ? g.name : '';
+        mapRoman.textContent = g ? ROMAN[g.key] : '';
+        if (!g) return;
+        [mapName, mapRoman].forEach((n) => { n.classList.remove('is-in'); void n.offsetWidth; n.classList.add('is-in'); });
+        g.cards.forEach((c, j) => {
+          const region = regions[c.name];
+          if (region) {
+            region.style.setProperty('--j', j);
+            region.classList.add('is-active');
+          }
+          const li = el('li');
+          const btn = el('button', 'chikyo-map-unit', c.name.replace('商工会', ''));
+          btn.type = 'button';
+          btn.style.setProperty('--j', j);
+          btn.addEventListener('mouseenter', () => hover(c.name, true));
+          btn.addEventListener('mouseleave', () => hover(c.name, false));
+          btn.addEventListener('focus', () => hover(c.name, true));
+          btn.addEventListener('blur', () => hover(c.name, false));
+          btn.addEventListener('click', () => goToCard(c.name));
+          li.appendChild(btn);
+          mapUnits.appendChild(li);
+        });
+      };
+
+      mapSvg.addEventListener('mouseover', (e) => {
+        const r = e.target.closest('.map-region');
+        if (r) hover(r.dataset.unit + '商工会', true);
+      });
+      mapSvg.addEventListener('mouseout', (e) => {
+        const r = e.target.closest('.map-region');
+        if (r) hover(r.dataset.unit + '商工会', false);
+      });
+      mapSvg.addEventListener('click', (e) => {
+        const r = e.target.closest('.map-region');
+        if (!r) return;
+        if (r.dataset.chikyo !== current) show(r.dataset.chikyo);
+        else goToCard(r.dataset.unit + '商工会');
+      });
+
+      allBtn.addEventListener('click', () => {
+        allBtn.classList.add('is-active');
+        chikyoBtn.classList.remove('is-active');
+        chikyoBtn.setAttribute('aria-expanded', 'false');
+        chipRow.classList.remove('is-open');
+        mapPanel.classList.remove('is-open');
+        show(null);
+      });
+      chikyoBtn.addEventListener('click', () => {
+        chikyoBtn.classList.add('is-active');
+        allBtn.classList.remove('is-active');
+        chikyoBtn.setAttribute('aria-expanded', 'true');
+        chipRow.classList.add('is-open');
+        mapPanel.classList.add('is-open');
+        mapSvg.classList.add('is-revealed');
+        if (!current) show(groups[0].key);
+      });
+      chipRow.addEventListener('click', (e) => {
+        const chip = e.target.closest('.chikyo-chip');
+        if (chip) show(chip.dataset.chikyo);
+      });
     });
-  });
+  }
 
   // ==========================================
   // Members Chart Bar Animation
